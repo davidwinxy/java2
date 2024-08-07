@@ -3,6 +3,8 @@
       layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div layout:fragment="content" >
+    <h1>Lista de Grupos</h1>
+    <a th:href="@{Grupos/create}" class="btn btn-outline-primary" >Nuevo grupo</a>
 <table class="table table-stirped">
     <theah>
         <tr>
@@ -15,8 +17,11 @@
     <tbody>
     <tr th:each="item : ${grupos}">
         <td th:text="${item.id}" ></td>
+        <td th:text="${item.nombre}" ></td>
+        <td th:text="${item.descripcion}" ></td>
+
         <td>
-            <a th:href="@{/grupos/details/{id} (id = ${item.id)}">ver</a>
+            <a th:href="@{/grupos/details/{id} (id = ${item.id))}">ver</a>
             <a th:href="">editar</a>
             <a th:href="">eliminar</a>
 
