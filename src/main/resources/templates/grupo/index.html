@@ -1,0 +1,32 @@
+<html lang="en"
+      xmlns:layout="http://www.ultra .net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content" >
+<table class="table table-stirped">
+    <theah>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Acciones</th>
+        </tr>
+    </theah>
+    <tbody>
+    <tr th:each="item : ${grupos}">
+        <td th:text="${item.id}" ></td>
+        <td>
+            <a th:href="@{/grupos/details/{id} (id = ${item.id)}">ver</a>
+            <a th:href="">editar</a>
+            <a th:href="">eliminar</a>
+
+        </td>
+
+
+
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</html>
