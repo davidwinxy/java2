@@ -13,9 +13,8 @@ public class Grupos  {
     @NotBlank(message = "ingrese el nombre del grupo")
     private String nombre;
 
-    @NotNull
+    @NotBlank(message = "ingrese la descripcion del grupo")
     private String descripcion;
-
 
     public Integer getId() {
         return Id;
@@ -33,11 +32,13 @@ public class Grupos  {
         this.nombre = nombre;
     }
 
-    public @NotNull String getDescripcion() {
+    public @NotBlank(message = "ingrese la descripcion del grupo") String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(@NotNull String descripcion) {
+    public void setDescripcion(@NotBlank(message = "ingrese la descripcion del grupo") String descripcion) {
         this.descripcion = descripcion;
     }
 }
+
+

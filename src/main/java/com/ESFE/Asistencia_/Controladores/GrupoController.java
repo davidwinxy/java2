@@ -26,52 +26,43 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/Grupos")
-
 public class GrupoController {
 
     @Autowired
     private IGruposServices gruposServices;
 
-
     @GetMapping
-    public String index(Model model, @RequestParam("page")Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
-        int currentPage = page.orElse(1) -1;
+    public String index(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1) - 1;
         int pageSize = size.orElse(10);
-        Pageable pageable = PageRequest.of(currentPage,pageSize);
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
         Page<Grupos> grupos = gruposServices.BuscarTodosPaginados(pageable);
         model.addAttribute("grupos", grupos);
         int totalPage = grupos.getTotalPages();
-        if(totalPage > 0){
+        if (totalPage > 0) {
             List<Integer> pageNumber = IntStream.rangeClosed(1, totalPage)
                     .boxed()
                     .collect(Collectors.toList());
-
-            model.addAttribute("pageNumber");
+            model.addAttribute("pageNumber", pageNumber);
         }
         return "grupo/index";
     }
 
-
     @GetMapping("/create")
-    public String create(Grupos grupos){
+    public String create(Model model) {
+        model.addAttribute("grupos", new Grupos());
         return "grupo/create";
     }
 
     @PostMapping("/save")
-    public String save(Grupos grupos, BindingResult result, Model model, RedirectAttributes attributes){
+    public String save(Grupos grupos, BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            model.addAttribute(grupos);
-            attributes.addFlashAttribute("error","no se pudo guardar debido a un error");
+            model.addAttribute("grupos", grupos);
+            attributes.addFlashAttribute("error", "no se pudo guardar debido a un error");
             return "grupo/create";
         }
         gruposServices.CrearOeditar(grupos);
-        attributes.addFlashAttribute("msg","grupo creado correctamente");
-        return "redirect:/grupos";
-
-
+        attributes.addFlashAttribute("msg", "grupo creado correctamente");
+        return "redirect:/Grupos";
     }
 }
-
-
-
-
