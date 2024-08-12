@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="/layouts/_mainLayout">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+>
 <head>
     <title>Crear Grupo</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Crear Nuevo Grupo</h1>
-    <form th:action="@{/grupos/save}" th:object="${grupos}" method="post">
+    <h1>Crear nuevo Grupo</h1>
+    <form th:action="@{/Grupos/save}" th:object="${grupos}" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nombre del grupo" required>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="escriba el nombre del grupo" required>
                 </div>
             </div>
         </div>
@@ -20,13 +23,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" placeholder="Escriba la descripción del grupo" required>
+                    <input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" placeholder="escriba la descripción del grupo" rows="3" required>
                 </div>
             </div>
         </div>
         <hr>
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a th:href="@{/grupos}" class="btn btn-secondary">Regresar</a>
+        <a th:href="@{/Grupos}" class="btn btn-secondary">Regresar</a>
     </form>
 </div>
 </body>

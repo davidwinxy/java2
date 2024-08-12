@@ -8,6 +8,27 @@
 </head>
 <body>
 <div layout:fragment="content">
+
+    <div th:if="${confirmar != null }" >
+        <script>
+            Swal.fire({
+            title:"confirmacion",
+            text:'[[ ${confirmar} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null }" >
+        <script>
+            Swal.fire({
+            title:"error",
+            text:'[[ ${error} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
     <h1>Lista de Grupos</h1>
     <a th:href="@{/Grupos/create}" class="btn btn-outline-primary">Nuevo grupo</a>
     <table class="table table-striped">
@@ -21,15 +42,25 @@
         </thead>
         <tbody>
         <tr th:each="item : ${grupos}">
-            <td th:text="${item.id}"></td>
+            <td th:text="${item.Id}"></td>
             <td th:text="${item.nombre}"></td>
             <td th:text="${item.descripcion}"></td>
             <td>
                 <a th:href="@{/Grupos/details/{id}(id=${item.id})}">ver</a>
+                <a th:href="@{/Grupos/edit/{id}(id=${item.id})}">editar</a>
+                <a th:href="@{/Grupos/remove/{id}(id=${item.id})}">eliminar</a>
 
         </tr>
         </tbody>
     </table>
+
+    <nav class="Page navegation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}"  >
+                <a class="page-link" th:href="@{|/grupos?page=${pageNumber}|}" th:text="${pageNumber}" ></a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>

@@ -11,10 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ESFE.Asistencia_.Entidades.Grupos;
 
@@ -34,16 +31,17 @@ public class GrupoController {
     @GetMapping
     public String index(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1) - 1;
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(5);
         Pageable pageable = PageRequest.of(currentPage, pageSize);
+
         Page<Grupos> grupos = gruposServices.BuscarTodosPaginados(pageable);
         model.addAttribute("grupos", grupos);
         int totalPage = grupos.getTotalPages();
         if (totalPage > 0) {
-            List<Integer> pageNumber = IntStream.rangeClosed(1, totalPage)
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPage)
                     .boxed()
                     .collect(Collectors.toList());
-            model.addAttribute("pageNumber", pageNumber);
+            model.addAttribute("pageNumbers", pageNumbers);
         }
         return "grupo/index";
     }
@@ -62,7 +60,38 @@ public class GrupoController {
             return "grupo/create";
         }
         gruposServices.CrearOeditar(grupos);
-        attributes.addFlashAttribute("msg", "grupo creado correctamente");
+        attributes.addFlashAttribute("confirmar", "grupo creado correctamente");
         return "redirect:/Grupos";
+    }
+
+
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable("id") Integer id, Model model){
+        Grupos grupos = gruposServices.BuscarPorId(id).get();
+        model.addAttribute("grupo", grupos);
+        return "grupo/details";
+    }
+
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model){
+        Grupos grupos = gruposServices.BuscarPorId(id).get();
+        model.addAttribute("grupo", grupos);
+        return "grupo/edit";
+    }
+
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable("id") Integer id, Model model){
+        Grupos grupos = gruposServices.BuscarPorId(id).get();
+        model.addAttribute("grupos", grupos);
+        return "grupo/delete";
+    }
+
+    @PostMapping("/delete")
+public String delete(Grupos grupos, RedirectAttributes attributes){
+    gruposServices.EliminarPorId(grupos.getId());
+    attributes.addFlashAttribute("msg", "Grupo eliminado correctamente");
+    return "redirect:/Grupos";
     }
 }
