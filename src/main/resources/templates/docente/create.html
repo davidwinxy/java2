@@ -1,0 +1,60 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+>
+<head>
+    <title>Crear Docente</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Crear nuevo Docente</h1>
+    <form th:action="@{/docentes/save}" th:object="${docentes}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="escriba el nombre del docente" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="apellido">apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}" id="apellido" placeholder="escriba el apellido del docente" rows="3" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">email</label>
+                    <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="escriba el email del docente"  required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="telefono">telefono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="escriba el telefono del docente"  required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="escuela">escuela</label>
+                    <input type="text" class="form-control" th:field="*{escuela}" id="escuela" placeholder="escriba la escuela del docente"  required>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/docentes}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
+</body>
+</html>

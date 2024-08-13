@@ -1,0 +1,73 @@
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lista de Docentes</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div th:if="${confirmar != null }" >
+        <script>
+            Swal.fire({
+            title:"confirmacion",
+            text:'[[ ${confirmar} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null }" >
+        <script>
+            Swal.fire({
+            title:"error",
+            text:'[[ ${error} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <h1>Lista de Docentes</h1>
+    <a th:href="@{/docentes/create}" class="btn btn-outline-primary">Nuevo docente</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>email</th>
+            <th>telefono</th>
+            <th>escuela</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${docentes}">
+            <td th:text="${item.Id}"></td>
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.apellido}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.telefono}"></td>
+            <td th:text="${item.escuela}"></td>
+
+
+            <td>
+                <a th:href="@{/docentes/details/{id}(id=${item.id})}">ver</a>
+                <a th:href="@{/docentes/edit/{id}(id=${item.id})}">editar</a>
+                <a th:href="@{/docentes/remove/{id}(id=${item.id})}">eliminar</a>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <nav class="Page navegation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}"  >
+                <a class="page-link" th:href="@{|/docentes?page=${pageNumber}|}" th:text="${pageNumber}" ></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content" >
+    <h1>Edtiar grupo</h1>
+
+
+    <form th:action="@{/Grupos/save}" th:object="${grupo}" method="post">
+        <input type="hidden" th:field="*{id}" >
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="form.group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nuevo nombre">
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="form.group">
+                    <label for="descripcion">descripcion</label>
+                    <input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" placeholder="Escriba el nuevo nombre">
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a th:herf="@{/Grupos}">Regresar</a>
+    </form>
+</div>
+
+
+</html>
