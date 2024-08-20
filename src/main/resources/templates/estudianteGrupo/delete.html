@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Eliminar </title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Eliminar </h1>
+
+    <p>¿Estás seguro de que deseas eliminar el siguiente registro?</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>ID</label>
+                <p th:text="${estudianteGrupo.id}">ID</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>estudiante</label>
+                <p th:text="${estudianteGrupo.estudiante.nombre}">Docente</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Grupo</label>
+                <p th:text="${estudianteGrupo.grupo.nombre}">Grupo</p>
+            </div>
+        </div>
+
+    </div>
+
+    <form th:action="@{/EstudianteGrupos/delete}" method="post">
+        <input type="hidden" th:field="*{id}" th:value="${estudianteGrupo.id}" />
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a th:href="@{/EstudianteGrupos}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+</body>
+</html>

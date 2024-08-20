@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lista de Docentes y grupos</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div th:if="${confirmar != null }" >
+        <script>
+            Swal.fire({
+            title:"confirmacion",
+            text:'[[ ${confirmar} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null }" >
+        <script>
+            Swal.fire({
+            title:"error",
+            text:'[[ ${error} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <h1>Lista de Docentes y Grupos</h1>
+    <a th:href="@{/DocenteGrupos/create}" class="btn btn-outline-primary">Nuevo registro</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Docente</th>
+            <th>Grupo</th>
+            <th>Año</th>
+            <th>Ciclo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${docenteGrupos}">
+            <td th:text="${item.id}">ID</td>
+            <td th:text="${item.docente.nombre}">Docente</td>
+            <td th:text="${item.grupo.nombre}">Grupo</td>
+            <td th:text="${item.año}">Año</td>
+            <td th:text="${item.ciclo}">Ciclo</td>
+            <td>
+                <a th:href="@{/DocenteGrupos/details/{id}(id=${item.id})}">ver</a>
+                <a th:href="@{/DocenteGrupos/edit/{id}(id=${item.id})}">editar</a>
+                <a th:href="@{/DocenteGrupos/remove/{id}(id=${item.id})}">eliminar</a>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <nav class="Page navegation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}"  >
+                <a class="page-link" th:href="@{|/grupos?page=${pageNumber}|}" th:text="${pageNumber}" ></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Editar Docente y Grupo</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Editar Estudiante y Grupo</h1>
+
+    <form th:action="@{/EstudianteGrupos/save}" th:object="${estudianteGrupos}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="estudiante">estudiante</label>
+                    <select class="form-control" th:field="*{estudiantes}" id="estudiante" required>
+                        <option th:each="estudiante : ${estudiantes}"
+                                th:value="${estudiante.id}"
+                                th:text="${estudiante.nombre}"
+                                th:selected="${estudiantes.id == estudianteGrupo.estudiante.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <select class="form-control" th:field="*{grupo}" id="grupo" required>
+                        <option th:each="grupo : ${grupos}"
+                                th:value="${grupo.id}"
+                                th:text="${grupo.nombre}"
+                                th:selected="${grupo.id == estudianteGrupo.grupo.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/EstudianteGrupos}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+</body>
+</html>

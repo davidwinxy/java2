@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+>
+<head>
+    <title>Crear estudiante</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Crear nuevo estudiante</h1>
+    <form th:action="@{/Estudiantes/save}" th:object="${estudiante}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="escriba el nombre del estudiante" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="correo">correo</label>
+                    <input type="text" class="form-control" th:field="*{correo}" id="correo" placeholder="escriba el correo del estudiante"  required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pin">pin</label>
+                    <input type="text" class="form-control" th:field="*{pin}" id="pin" placeholder="escriba el pin del estudiante" rows="3" required>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/Estudiantes}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
+</body>
+</html>

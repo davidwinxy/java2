@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Editar Docente y Grupo</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Editar Docente y Grupo</h1>
+
+    <form th:action="@{/DocenteGrupos/save}" th:object="${docenteGrupo}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="docente">Docente</label>
+                    <select class="form-control" th:field="*{docente}" id="docente" required>
+                        <option th:each="docente : ${docentes}"
+                                th:value="${docente.id}"
+                                th:text="${docente.nombre}"
+                                th:selected="${docente.id == docenteGrupo.docente.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <select class="form-control" th:field="*{grupo}" id="grupo" required>
+                        <option th:each="grupo : ${grupos}"
+                                th:value="${grupo.id}"
+                                th:text="${grupo.nombre}"
+                                th:selected="${grupo.id == docenteGrupo.grupo.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="año">Año</label>
+                    <input type="number" class="form-control" th:field="*{año}" id="año" placeholder="Escriba el año" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ciclo">Ciclo</label>
+                    <input type="text" class="form-control" th:field="*{ciclo}" id="ciclo" placeholder="Escriba el ciclo" required />
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/DocenteGrupos}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Eliminar Docente y Grupo</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Eliminar Docente y Grupo</h1>
+
+    <p>¿Estás seguro de que deseas eliminar el siguiente registro?</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>ID</label>
+                <p th:text="${docenteGrupo.id}">ID</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Docente</label>
+                <p th:text="${docenteGrupo.docente.nombre}">Docente</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Grupo</label>
+                <p th:text="${docenteGrupo.grupo.nombre}">Grupo</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Año</label>
+                <p th:text="${docenteGrupo.año}">Año</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Ciclo</label>
+                <p th:text="${docenteGrupo.ciclo}">Ciclo</p>
+            </div>
+        </div>
+    </div>
+
+    <form th:action="@{/DocenteGrupos/delete}" method="post">
+        <input type="hidden" th:field="*{id}" th:value="${docenteGrupo.id}" />
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a th:href="@{/DocenteGrupos}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+</body>
+</html>

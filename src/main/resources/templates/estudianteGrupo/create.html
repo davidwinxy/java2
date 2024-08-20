@@ -1,0 +1,40 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Crear DocenteGrupo</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Crear nuevo Estudiante</h1>
+    <form th:action="@{/EstudianteGrupos/save}" th:object="${estudianteGrupo}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="estudiante">estudiante</label>
+                    <select class="form-control" th:field="*{estudiante}" id="estudiante" required>
+                        <option th:each="estudiante : ${estudiantes}" th:value="${estudiante.id}" th:text="${estudiante.nombre}">Seleccionar estudiante</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <select class="form-control" th:field="*{grupo}" id="grupo" required>
+                        <option th:each="grupo : ${grupos}" th:value="${grupo.id}" th:text="${grupo.nombre}">Seleccionar Grupo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/EstudianteGrupos}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
+</body>
+</html>

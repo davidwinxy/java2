@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Detalles de Docente y Grupo</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Detalles de estudiante y Grupo</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Detalles</h5>
+            <p class="card-text"><strong>ID:</strong> <span th:text="${estudianteGrupo.id}"></span></p>
+            <p class="card-text"><strong>Estudiante :</strong> <span th:text="${estudianteGrupo.estudiante.nombre}"></span></p>
+            <p class="card-text"><strong>Grupo:</strong> <span th:text="${estudianteGrupo.grupo.nombre}"></span></p>
+
+
+            <a th:href="@{/EstudianteGrupos/edit/{id}(id=${estudianteGrupo.id})}" class="btn btn-primary">Editar</a>
+            <a th:href="@{/EstudianteGrupos/remove/{id}(id=${estudianteGrupo.id})}" class="btn btn-danger">Eliminar</a>
+            <a th:href="@{/EstudianteGrupos}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

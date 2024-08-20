@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lista de estudiantes y grupos</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div th:if="${confirmar != null }" >
+        <script>
+            Swal.fire({
+            title:"confirmacion",
+            text:'[[ ${confirmar} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null }" >
+        <script>
+            Swal.fire({
+            title:"error",
+            text:'[[ ${error} ]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <h1>Lista de estudiantes y Grupos</h1>
+    <a th:href="@{/EstudianteGrupos/create}" class="btn btn-outline-primary">Nuevo registro</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>estudiante</th>
+            <th>Grupo</th>
+
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${estudianteGrupo}">
+            <td th:text="${item.id}">ID</td>
+            <td th:text="${item.estudiante.nombre}">Docente</td>
+            <td th:text="${item.grupo.nombre}">Grupo</td>
+
+            <td>
+                <a th:href="@{/EstudianteGrupos/details/{id}(id=${item.id})}">ver</a>
+                <a th:href="@{/EstudianteGrupos/edit/{id}(id=${item.id})}">editar</a>
+                <a th:href="@{/EstudianteGrupos/remove/{id}(id=${item.id})}">eliminar</a>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>
